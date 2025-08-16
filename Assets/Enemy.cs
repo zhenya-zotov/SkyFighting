@@ -1,8 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class Enemy : MonoBehaviour
 {
+    [Header("Destroyed Enemy")]
+    public GameObject destroyedEnemy;
+    
     public float speed = 2f;
 
     private Transform planet;
@@ -40,5 +44,10 @@ public class Enemy : MonoBehaviour
             // TODO: вызвать PlanetHealth.TakeDamage(...)
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        Instantiate(destroyedEnemy, gameObject.transform.position, Quaternion.identity);
     }
 }
