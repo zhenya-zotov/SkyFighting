@@ -1,0 +1,63 @@
+name: Build & Publish (Unity → itch.io)
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch: {}
+
+jobs:
+  build-webgl:
+    name: Build WebGL
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-SkyJam-WebGL
+          restore-keys: |
+            Library-SkyJam-
+            Library-
+
+      - name: Build (GameCI Unity Builder)
+        id: buildStep
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WebGL
+          path: build/WebGL
+
+  publish-itch:
+    name: Publish to itch.io (webgl channel)
+    needs: build-webgl
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: WebGL
+          path: WebGL
+
+      - name: Setup Butler
+        uses: remarkablegames/setup-butler@v1
+
+      - name: Push to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          USER_VERSION="${{ steps.buildStep.outputs.buildVersion || '' }}"
+          if [ -z "$USER_VERSION" ]; then USER_VERSION="${GITHUB_SHA::7}"; fi
+          butler push WebGL gold-ded/sk:webgl --userversion "$USER_VERSION"
