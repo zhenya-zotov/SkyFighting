@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
 
     void OnDestroy()
     {
-        Instantiate(destroyedEnemy, gameObject.transform.position, Quaternion.identity);
+        var destroyed = Instantiate(destroyedEnemy, gameObject.transform.position, Quaternion.identity);
+        destroyed.transform.localScale = gameObject.transform.localScale;
     }
 }
