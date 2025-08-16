@@ -12,6 +12,8 @@ public class EnemyHealth : MonoBehaviour
         hp -= dmg;
         if (hp <= 0f)
         {
+            
+            SkyCoinCounter.Instance.AddCoin(1);
             Destroy(gameObject);
         }
     }
