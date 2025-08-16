@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
     //     Destroy(gameObject);
     // }
 
-    void DieEmeny()
+    public void DieEmeny()
     {
         if (destroyedEnemy != null)
         {

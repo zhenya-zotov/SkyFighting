@@ -12,7 +12,8 @@ public class BulletDamage : MonoBehaviour
         if (target != null)
         {
             target.TakeDamage(damage);
-            Destroy(gameObject); // пуля исчезает после попадания
+            var enemy = other.gameObject.GetComponent<Enemy>();
+            enemy.DieEmeny();
         }
     }
 }
