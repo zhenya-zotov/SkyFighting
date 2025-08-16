@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
 {
     [Header("Destroyed Enemy")]
     public GameObject destroyedEnemy;
-    
+
     public float speed = 2f;
+    public float damagePlanet = 10f;
 
     private Transform planet;
     private Rigidbody2D rb;
@@ -42,13 +43,34 @@ public class Enemy : MonoBehaviour
         if (col.gameObject.CompareTag("Planet"))
         {
             // TODO: вызвать PlanetHealth.TakeDamage(...)
-            Destroy(gameObject);
+            // найдём компонент здоровья у планеты
+            var ph = col.gameObject.GetComponent<PlanetHealth>();
+            if (ph != null)
+            {
+                ph.TakeDamage(damagePlanet); // урон за одного врага (подбери значение)
+            }
+            DieEmeny();
         }
     }
+    
+    // TODO: Error Some objects were not cleaned up when closing the scene.
+    // void OnDestroy()
+    // {
+    //     var destroyed = Instantiate(destroyedEnemy, gameObject.transform.position, Quaternion.identity);
+    //     destroyed.transform.localScale = gameObject.transform.localScale;
 
-    void OnDestroy()
+    //     Destroy(gameObject);
+    // }
+
+    void DieEmeny()
     {
-        var destroyed = Instantiate(destroyedEnemy, gameObject.transform.position, Quaternion.identity);
-        destroyed.transform.localScale = gameObject.transform.localScale;
+        if (destroyedEnemy != null)
+        {
+            var destroyed = Instantiate(destroyedEnemy, transform.position, Quaternion.identity);
+            destroyed.transform.localScale = transform.localScale;
+        }
+
+        Destroy(gameObject); // уничтожаем врага
     }
+
 }
