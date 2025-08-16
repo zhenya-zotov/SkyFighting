@@ -20,6 +20,6 @@ public class SkyCoinCounter : MonoBehaviour
 
     private void UpdateUI()
     {
-        skyCoinText.text = "SkyCoin: " + skyCoins;
+        skyCoinText.text = "SCORE: " + skyCoins;
     }
 }
