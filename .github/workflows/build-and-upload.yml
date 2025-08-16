@@ -60,4 +60,4 @@ jobs:
         run: |
           USER_VERSION="${{ steps.buildStep.outputs.buildVersion || '' }}"
           if [ -z "$USER_VERSION" ]; then USER_VERSION="${GITHUB_SHA::7}"; fi
-          butler push WebGL gold-ded/sk:webgl --userversion "$USER_VERSION"
+          butler push WebGL overcasthawk/skyjam:webgl --userversion "$USER_VERSION"
