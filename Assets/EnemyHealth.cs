@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake() => hp = maxHP;
 
-    public void TakeDamage(float dmg)
+    public bool TakeDamage(float dmg)
     {
         hp -= dmg;
         if (hp <= 0f)
@@ -15,6 +15,9 @@ public class EnemyHealth : MonoBehaviour
             
             SkyCoinCounter.Instance.AddCoin(1);
             Destroy(gameObject);
+            return true;
         }
+
+        return false;
     }
 }

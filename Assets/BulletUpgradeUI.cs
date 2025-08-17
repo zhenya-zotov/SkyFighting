@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;           // если TMP — см. ниже
-// using TMPro;
+using UnityEngine.UI;
 
 public class BulletUpgradeUI : MonoBehaviour
 {
@@ -25,12 +24,24 @@ public class BulletUpgradeUI : MonoBehaviour
         if (addDPSButton) addDPSButton.onClick.AddListener(OnAddDPS);
         if (addBulletsButtonText)
         {
-            addBulletsButtonText.text = $"+2 Bullets ({addBulletsPrice})";
+            addBulletsButtonText.text = $"Bullets {kFormat(addBulletsPrice)}";
         }
         if (addDPSButtonText)
         {
-            addDPSButtonText.text = $"+DPS ({addDPSPrice})";
+            addDPSButtonText.text = $"DPS {kFormat(addDPSPrice)}";
         }
+    }
+
+    private string kFormat(int value)
+    {
+        string kSuff = "";
+        while (value >= 1000)
+        {
+            value /= 1000;
+            kSuff += "k";
+        }
+
+        return $"{value}{kSuff}";
     }
 
     private void OnAddBullets()
@@ -43,9 +54,13 @@ public class BulletUpgradeUI : MonoBehaviour
 
         autoFire.bulletsCont = newCount;
         addBulletsPrice += addBulletsPrice;
+        if (addBulletsPrice > 500 && addBulletsPrice < 1000)
+        {
+            addBulletsPrice = 500;
+        }
         if (addBulletsButtonText)
         {
-            addBulletsButtonText.text = $"+2 Bullets ({addBulletsPrice})";
+            addBulletsButtonText.text = $"Bullets {kFormat(addBulletsPrice)}";
         }
     }
     
@@ -60,9 +75,13 @@ public class BulletUpgradeUI : MonoBehaviour
         autoFire.fireRate = newCount;
 
         addDPSPrice += addDPSPrice;
+        if (addDPSPrice > 500 && addDPSPrice < 1000)
+        {
+            addDPSPrice = 500;
+        }
         if (addDPSButtonText)
         {
-            addDPSButtonText.text = $"+DPS ({addDPSPrice})";
+            addDPSButtonText.text = $"DPS {kFormat(addDPSPrice)}";
         }
     }
 }

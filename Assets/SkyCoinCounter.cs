@@ -28,9 +28,21 @@ public class SkyCoinCounter : MonoBehaviour
         UpdateUI();
         return true;
     }
+    
+    private string kFormat(int value)
+    {
+        string kSuff = "";
+        while (value >= 1000)
+        {
+            value /= 1000;
+            kSuff += "k";
+        }
+
+        return $"{value}{kSuff}";
+    }
 
     private void UpdateUI()
     {
-        skyCoinText.text = "SCORE: " + skyCoins;
+        skyCoinText.text = $"ScyCoin: {kFormat(skyCoins)}";
     }
 }

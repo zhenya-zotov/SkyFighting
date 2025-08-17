@@ -11,9 +11,12 @@ public class BulletDamage : MonoBehaviour
         var target = other.GetComponent<EnemyHealth>();
         if (target != null)
         {
-            target.TakeDamage(damage);
+            var destroyed = target.TakeDamage(damage);
             var enemy = other.gameObject.GetComponent<Enemy>();
-            enemy.DieEmeny();
+            if (destroyed)
+            {
+                enemy.DieEmeny();
+            }
             Destroy(gameObject);
         }
     }
