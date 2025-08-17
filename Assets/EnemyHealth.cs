@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
         {
             
             SkyCoinCounter.Instance.AddCoin(rewardForDestroy);
+            KillerCounter.Instance.AddKill(rewardForDestroy);
             Destroy(gameObject);
             return true;
         }
