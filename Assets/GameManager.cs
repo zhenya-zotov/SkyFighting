@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AutoFire autoFire;
     [SerializeField] private Button addBulletsButton;
     [SerializeField] private Button addDPSButton;
+    [SerializeField] private SkyCoinCounter skyCoinCounter;
     [SerializeField] private GameObject pausePanel;
     public static GameManager Instance { get; private set; } // singleton
 
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
     [Header("Level")]
     public TMP_Text levelCountText;
     private int levelCount = 0;
+    [SerializeField] private int scoreToNextLevel = 2; 
+    [SerializeField] private float growScoreToNextLevel = 2f; 
     
     private bool isPaused = false;
 
@@ -68,9 +71,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0f)
+        if (skyCoinCounter.GetCoins() >= scoreToNextLevel)
         {
+            scoreToNextLevel = Mathf.CeilToInt(scoreToNextLevel * growScoreToNextLevel);
             NextRound();
         }
         UpdateTimerUI();
@@ -78,8 +81,7 @@ public class GameManager : MonoBehaviour
 
     void NextRound()
     {
-        timeLeft = roundTime;
-
+        if (isPaused) return;
         levelCount += 1;
 
         levelCountText.text = "LEVEL: " + levelCount;

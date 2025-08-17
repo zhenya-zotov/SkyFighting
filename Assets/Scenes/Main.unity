@@ -3208,14 +3208,17 @@ MonoBehaviour:
   autoFire: {fileID: 1162422702}
   addBulletsButton: {fileID: 913190316}
   addDPSButton: {fileID: 183701586}
+  skyCoinCounter: {fileID: 542920024}
   pausePanel: {fileID: 1772895012}
   addBulletsCount: 2
-  addDPS: 0.7
+  addDPS: 2.2
   roundTime: 15
   timerText: {fileID: 1043141731}
   damageInocrease: 0
   spawnRateMultiplayer: 1.3
   levelCountText: {fileID: 1913815600}
+  scoreToNextLevel: 8
+  growScoreToNextLevel: 1.7
 --- !u!1 &1772895012
 GameObject:
   m_ObjectHideFlags: 0

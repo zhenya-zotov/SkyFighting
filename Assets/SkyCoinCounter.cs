@@ -18,6 +18,11 @@ public class SkyCoinCounter : MonoBehaviour
         UpdateUI();
     }
 
+    public int GetCoins()
+    {
+        return skyCoins;
+    }
+
     public bool TryToConsumeCoins(int amount)
     {
         if (skyCoins < amount)
