@@ -11,6 +11,8 @@ public class PlanetHealth : MonoBehaviour
     public bool reloadSceneOnDeath = true;
     public string sceneName = ""; // пусто = текущая сцена
 
+    public GameObject gameOverPanel;
+
     void Awake()
     {
         hp = maxHP;
@@ -26,19 +28,17 @@ public class PlanetHealth : MonoBehaviour
 
         if (hp <= 0f)
         {
-            if (reloadSceneOnDeath)
-            {
-                var name = string.IsNullOrEmpty(sceneName)
-                    ? SceneManager.GetActiveScene().name
-                    : sceneName;
-                SceneManager.LoadScene(name);
-            }
-            else
-            {
-                // можно показать окно поражения
-                Debug.Log("Планета уничтожена");
-            }
+            GameOver();
         }
+    }
+
+    void GameOver()
+    {
+        // показать панель
+        gameOverPanel.SetActive(true);
+
+        // остановить игру
+        Time.timeScale = 0f;
     }
 
     public float HP01() => Mathf.Clamp01(hp / maxHP);
