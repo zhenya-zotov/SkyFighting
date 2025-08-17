@@ -18,6 +18,17 @@ public class SkyCoinCounter : MonoBehaviour
         UpdateUI();
     }
 
+    public bool TryToConsumeCoins(int amount)
+    {
+        if (skyCoins < amount)
+        {
+            return false;
+        }
+        skyCoins -= amount;
+        UpdateUI();
+        return true;
+    }
+
     private void UpdateUI()
     {
         skyCoinText.text = "SCORE: " + skyCoins;

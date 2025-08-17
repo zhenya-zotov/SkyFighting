@@ -4,6 +4,9 @@ using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    
+    [Header("References")]
+    [SerializeField] private EnemySpawner enemySpawner;
     public static GameManager Instance { get; private set; } // singleton
 
     [Header("Timer")]
@@ -13,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Enemy Damage")]
     public float damageInocrease = 5f;  // прибавка урока
+    public float spawnRateMultiplayer = 2;
 
     [Header("Level")]
     public TMP_Text levelCountText;
@@ -59,6 +63,7 @@ public class GameManager : MonoBehaviour
                 enemy.damagePlanet += damageInocrease;
             }
         }
+        enemySpawner.spawnInterval = enemySpawner.spawnInterval * (1/spawnRateMultiplayer);
     }
 
     void UpdateTimerUI()
