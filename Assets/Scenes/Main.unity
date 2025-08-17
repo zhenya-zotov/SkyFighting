@@ -3211,7 +3211,7 @@ MonoBehaviour:
   skyCoinCounter: {fileID: 542920024}
   pausePanel: {fileID: 1772895012}
   addBulletsCount: 2
-  addDPS: 2.2
+  addDPS: 1.9
   roundTime: 15
   timerText: {fileID: 1043141731}
   damageInocrease: 0
