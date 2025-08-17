@@ -1,7 +1,7 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button addDPSButton;
     [SerializeField] private SkyCoinCounter skyCoinCounter;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private Slider xpSlider;
     public static GameManager Instance { get; private set; } // singleton
 
     [Header("Upgrades")]
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     private int levelCount = 0;
     [SerializeField] private int scoreToNextLevel = 2; 
     [SerializeField] private float growScoreToNextLevel = 2f; 
+    private int lastLevelUpScore = 0; 
     
     private bool isPaused = false;
 
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
         if (addBulletsButton) addBulletsButton.onClick.AddListener(OnAddBullets);
         if (addDPSButton) addDPSButton.onClick.AddListener(OnAddDPS);
         Instance = this;
+        lastLevelUpScore = 0;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,17 +74,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var score = skyCoinCounter.GetCoins();
+        xpSlider.value = ((float)score - lastLevelUpScore) / (scoreToNextLevel - lastLevelUpScore);
         if (skyCoinCounter.GetCoins() >= scoreToNextLevel)
         {
+            lastLevelUpScore = scoreToNextLevel;
             scoreToNextLevel = Mathf.CeilToInt(scoreToNextLevel * growScoreToNextLevel);
             NextRound();
         }
-        UpdateTimerUI();
     }
 
     void NextRound()
     {
         if (isPaused) return;
+        xpSlider.value = 0;
         levelCount += 1;
 
         levelCountText.text = "LEVEL: " + levelCount;
