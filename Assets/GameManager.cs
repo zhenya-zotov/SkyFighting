@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
                 enemy.damagePlanet += damageInocrease;
             }
         }
+        enemySpawner.SetLevel(levelCount);
         enemySpawner.spawnInterval = enemySpawner.spawnInterval * (1/spawnRateMultiplayer);
     }
 

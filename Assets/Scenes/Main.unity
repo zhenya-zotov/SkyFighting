@@ -1267,6 +1267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4866904425634624160, guid: b05426ccdc60039a7bd94bff7278d51b, type: 3}
+  redEnemyPrefab: {fileID: 0}
   spawnRadius: 20
   spawnInterval: 10
 --- !u!4 &907091824
@@ -2010,6 +2011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4866904425634624160, guid: 689d4fd166e453bfaa2673f969a1aa7d, type: 3}
+  redEnemyPrefab: {fileID: 4866904425634624160, guid: ca6925719b977f24a9b29e83e629da99, type: 3}
   spawnRadius: 10
   spawnInterval: 2
 --- !u!4 &1407501524

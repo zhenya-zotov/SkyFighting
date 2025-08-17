@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float maxHP = 3f;
+    public int rewardForDestroy = 1;
     private float hp;
 
     void Awake() => hp = maxHP;
@@ -13,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
         if (hp <= 0f)
         {
             
-            SkyCoinCounter.Instance.AddCoin(1);
+            SkyCoinCounter.Instance.AddCoin(rewardForDestroy);
             Destroy(gameObject);
             return true;
         }
