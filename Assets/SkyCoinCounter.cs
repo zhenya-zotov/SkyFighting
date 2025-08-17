@@ -48,6 +48,6 @@ public class SkyCoinCounter : MonoBehaviour
 
     private void UpdateUI()
     {
-        skyCoinText.text = $"ScyCoin: {kFormat(skyCoins)}";
+        skyCoinText.text = $"SCORE: {kFormat(skyCoins)}";
     }
 }

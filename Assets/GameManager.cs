@@ -97,10 +97,9 @@ public class GameManager : MonoBehaviour
         foreach (GameObject enemyObj in enemies)
         {
             Enemy enemy = enemyObj.GetComponent<Enemy>();
-
             if (enemy != null)
             {
-                enemy.damagePlanet += damageInocrease;
+                enemy.DieEmeny();
             }
         }
         enemySpawner.SetLevel(levelCount);
