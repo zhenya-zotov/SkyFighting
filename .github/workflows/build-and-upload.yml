@@ -1,8 +1,8 @@
 name: Build & Publish (Unity → itch.io)
 
 on:
-  push:
-    branches: [ master, main ]
+  # push:
+  #   branches: [ master, main ]
   workflow_dispatch: {}
 
 jobs:
